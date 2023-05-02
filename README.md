@@ -40,7 +40,7 @@ Intentionally barebones. 🦴
   - `SHOPIFY_API_KEY`: The Shopify Api key of the app, you have just created
   - `SHOPIFY_API_SECRET_KEY`: The Shopify Api secret key of the app, you have just created
   - `SCOPES`: The [access scopes](https://shopify.dev/api/usage/access-scopes) your app needs
-  - `HOST`: The Url of your app. Leave this empty for development
+  - `HOST`: The Url of your app. IMPORTANT: As of Next 13 update, this must be deleted before every `npm run dev`. This is because next.config.mjs will run twice, and ngrok will then attempt to start another tunnel. To circumvent this, ngrok will not run on startup if a HOST exists.
   - `SHOP`: Your dev stores url
   - `NGROK_AUTH_TOKEN`: Your [Ngrok auth token](https://dashboard.ngrok.com/get-started/your-authtoken)
   - `UPSTASH_REDIS_REST_URL`: Your Upstash Redis REST url.

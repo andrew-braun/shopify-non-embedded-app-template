@@ -59,7 +59,8 @@ async function setEnvironmentAndReturnHost() {
 
 const nextConfig = async (phase) => {
 	let HOST = process.env.HOST
-	if (phase === PHASE_DEVELOPMENT_SERVER) {
+
+	if (phase === PHASE_DEVELOPMENT_SERVER && !process.env.HOST) {
 		HOST = await setEnvironmentAndReturnHost()
 	}
 	/**

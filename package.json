@@ -9,23 +9,24 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@apollo/client": "^3.7.13",
+		"@apollo/client": "^3.6.2",
 		"@shopify/cli-kit": "^3.0.24",
+		"@shopify/polaris": "^10.48.0",
 		"@shopify/shopify-api": "^3.0.1",
 		"chalk": "^5.2.0",
 		"envfile": "^6.18.0",
 		"graphql": "^16.6.0",
 		"localtunnel": "^2.0.2",
-		"next": "^13.3.4",
-		"ngrok": "^4.3.3",
+		"next": "^13.3.1",
+		"ngrok": "^4.3.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	},
 	"devDependencies": {
-		"@types/node": "^18.16.3",
+		"@types/node": "^18.16.2",
 		"@types/react": "^18.2.0",
 		"eslint": "^8.39.0",
-		"eslint-config-next": "^13.3.4",
+		"eslint-config-next": "^13.3.1",
 		"typescript": "^5.0.4"
 	}
 }
