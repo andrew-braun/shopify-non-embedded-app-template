@@ -16,7 +16,7 @@ export async function middleware(req: NextRequest) {
 
 		const { shop } = query
 
-		const sessionId = req.cookies["shopify_app_session"]
+		const sessionId = req.cookies.get("shopify_app_session").value
 
 		if (sessionId === undefined) {
 			if (shop) {
