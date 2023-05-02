@@ -15,7 +15,6 @@ export async function middleware(req: NextRequest) {
 		const query = Object.fromEntries(urlParams)
 
 		const { shop } = query
-		console.log(Object.keys(req))
 
 		const sessionId = req.cookies["shopify_app_session"]
 
