@@ -1,3 +1,4 @@
+import Shopify from "lib/shopify"
 import { api, error as kitError, output, session, ui } from "@shopify/cli-kit"
 
 export async function selectOrganizationPrompt(organizations) {

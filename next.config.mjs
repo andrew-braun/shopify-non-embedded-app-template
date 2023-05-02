@@ -1,15 +1,20 @@
 import * as envfile from "envfile"
 import * as ngrok from "ngrok"
 
-import { output, session } from "@shopify/cli-kit"
+import "@shopify/shopify-api/adapters/node"
+// import { output, session } from "@shopify/cli-kit"
+
 import path, { resolve } from "path"
 import { readFile, writeFileSync } from "fs"
+
+import cli from "./src/lib/shopifyCli.mjs"
+import { fileURLToPath } from "url"
 
 import nextConstants from "next/constants.js"
 const { PHASE_DEVELOPMENT_SERVER } = nextConstants
 
-import cli from "./src/lib/shopifyCli.mjs"
-import { fileURLToPath } from "url"
+import Shopify from "./src/lib/shopify.ts"
+console.log(Shopify)
 
 const writeEnvToFile = (envVariables) => {
 	const __filename = fileURLToPath(import.meta.url)
@@ -49,7 +54,8 @@ async function setEnvironmentAndReturnHost() {
 
 	if (tunnelUrl) {
 		writeEnvToFile([{ key: "HOST", value: tunnelUrl }])
-		output.info(output.content`\n\nNgrok tunnel is running\n`)
+		// output.info(output.content`\n\nNgrok tunnel is running\n`)
+		console.log("Ngrok tunnel is running")
 		await cli.updateURLs(app.apiKey, tunnelUrl)
 		cli.outputAppURL(true, store, tunnelUrl)
 	}
