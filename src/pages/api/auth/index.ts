@@ -1,15 +1,23 @@
-import Shopify from "@lib/shopify";
-import { ApiRequest, NextApiResponse } from "@types";
+import Shopify from "@lib/shopify"
+import { ApiRequest, NextApiResponse } from "@types"
 
-export default async function handler(req: ApiRequest, res: NextApiResponse ) {
-    const shop = req.query.shop
+export default async function handler(req: ApiRequest, res: NextApiResponse) {
+	const shop = req.query.shop
 
-    if (!shop) {
-        res.redirect('/login')
-    }
+	if (!shop) {
+		res.redirect("/login")
+	}
+	console.log(`Beginning auth for ${shop}`)
 
-    const authRoute = await Shopify.Auth.beginAuth(req, res, shop, '/api/auth/callback', true)
+	const authRoute = await Shopify.auth.begin({
+		rawRequest: req,
+		rawResponse: res,
+		shop: shop,
+		callbackPath: "/api/auth/callback",
+		isOnline: true,
+	})
+	console.log("authRoute: ", authRoute)
 
-    res.redirect(authRoute)
-
+	// console.log("Redirecting to auth route: ", authRoute)
+	// res.redirect(authRoute)
 }

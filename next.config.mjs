@@ -1,7 +1,6 @@
 import * as envfile from "envfile"
 import * as ngrok from "ngrok"
 
-import "@shopify/shopify-api/adapters/node"
 import { output, session } from "@shopify/cli-kit"
 
 import path, { resolve } from "path"

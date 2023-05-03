@@ -1,3 +1,5 @@
+import Shopify from "@lib/shopify"
+
 import { NextRequest, NextResponse } from "next/server"
 
 const upstashRedisRestUrl = process.env.UPSTASH_REDIS_REST_URL
@@ -8,7 +10,7 @@ const headers = {
 	"Content-Type": "application/json",
 }
 
-export async function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest, res: NextResponse) {
 	if (req.url.includes("/app") || req.url.includes("/graphql")) {
 		const urlParams = new URLSearchParams(req.url.split("?")[1])
 
@@ -16,7 +18,13 @@ export async function middleware(req: NextRequest) {
 
 		const { shop } = query
 
-		const sessionId = req.cookies.get("shopify_app_session").value
+		// const sessionId = req.cookies.get("shopify_app_session").value
+		const sessionId = await Shopify.session.getCurrentId({
+			isOnline: true,
+			rawRequest: req,
+			rawResponse: res,
+		})
+		console.log("Session id: ", sessionId)
 
 		if (sessionId === undefined) {
 			if (shop) {
@@ -45,7 +53,7 @@ export async function middleware(req: NextRequest) {
 						`${process.env.HOST}/api/auth/offline?shop=${shop}`
 					)
 				} else {
-					console.log(req.method)
+					console.log("Request method: ", req.method)
 					return NextResponse.redirect(`${process.env.HOST}/login`, 303)
 				}
 			}

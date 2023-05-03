@@ -16,5 +16,5 @@ export default async function handler(req: ApiRequest, res: NextApiResponse) {
 		isOnline: false,
 	})
 
-	res.redirect(authRoute)
+	// res.redirect(authRoute)
 }

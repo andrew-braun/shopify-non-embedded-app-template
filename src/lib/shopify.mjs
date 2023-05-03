@@ -1,3 +1,4 @@
+import "@shopify/shopify-api/adapters/node"
 import { shopifyApi, ApiVersion, BillingInterval } from "@shopify/shopify-api"
 import { restResources } from "@shopify/shopify-api/rest/admin/2022-07"
 
