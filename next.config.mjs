@@ -2,7 +2,7 @@ import * as envfile from "envfile"
 import * as ngrok from "ngrok"
 
 import "@shopify/shopify-api/adapters/node"
-// import { output, session } from "@shopify/cli-kit"
+import { output, session } from "@shopify/cli-kit"
 
 import path, { resolve } from "path"
 import { readFile, writeFileSync } from "fs"
@@ -12,9 +12,6 @@ import { fileURLToPath } from "url"
 
 import nextConstants from "next/constants.js"
 const { PHASE_DEVELOPMENT_SERVER } = nextConstants
-
-import Shopify from "./src/lib/shopify.ts"
-console.log(Shopify)
 
 const writeEnvToFile = (envVariables) => {
 	const __filename = fileURLToPath(import.meta.url)
