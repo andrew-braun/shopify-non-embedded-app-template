@@ -11,7 +11,9 @@ export default async function handler(req: ApiRequest, res: NextApiResponse) {
 		})
 		console.log("Callback response: ", callbackResponse)
 
-		const storedSession = SessionStorage.storeSession(callbackResponse.session)
+		const storedSession = await SessionStorage.storeSession(
+			callbackResponse.session
+		)
 		console.log("Stored session: ", storedSession)
 
 		// const webhooks = await Shopify.Webhooks.Registry.registerAll({

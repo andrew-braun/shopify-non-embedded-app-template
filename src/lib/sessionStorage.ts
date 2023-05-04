@@ -1,5 +1,6 @@
 import { RedisSessionStorage } from "@shopify/shopify-app-session-storage-redis"
 import Shopify from "@shopify/shopify-api"
+
 import fetch from "node-fetch"
 
 const upstashRedisRestUrl = process.env.UPSTASH_REDIS_REST_URL
@@ -45,9 +46,13 @@ const deleteCallback = async (id) => {
 
 // const SessionStorage = new Shopify.Session.CustomSessionStorage(storeCallback, loadCallback, deleteCallback)
 
-const url = new URL(process.env.UPSTASH_REDIS_CONNECTION_STRING)
-const SessionStorage = new RedisSessionStorage(url, {
-	url: url.toString(),
+const redisUrl = process.env.UPSTASH_REDIS_CONNECTION_STRING
+const clientUrl = new URL(redisUrl)
+console.log("Redis URL: ", redisUrl)
+console.log("Client URL: ", clientUrl)
+
+const SessionStorage = new RedisSessionStorage(clientUrl, {
+	url: clientUrl.toString(),
 	socket: {
 		tls: true,
 		rejectUnauthorized: false,

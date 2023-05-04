@@ -1,3 +1,4 @@
+import SessionStorage from "@lib/sessionStorage"
 import Shopify from "@lib/shopify"
 
 import { NextRequest, NextResponse } from "next/server"
@@ -17,13 +18,8 @@ export async function middleware(req: NextRequest, res: NextResponse) {
 		const query = Object.fromEntries(urlParams)
 
 		const { shop } = query
+		const sessionId = req.cookies.get("shopify_app_session").value
 
-		// const sessionId = req.cookies.get("shopify_app_session").value
-		const sessionId = await Shopify.session.getCurrentId({
-			isOnline: true,
-			rawRequest: req,
-			rawResponse: res,
-		})
 		console.log("Session id: ", sessionId)
 
 		if (sessionId === undefined) {
@@ -35,6 +31,9 @@ export async function middleware(req: NextRequest, res: NextResponse) {
 			console.log("Redirect to login")
 			return NextResponse.redirect(`${process.env.HOST}/login`)
 		} else {
+			// console.log("Load session: ", SessionStorage.loadSession(sessionId))
+			// const session = await SessionStorage.loadSession(sessionId)
+
 			const { result } = await fetch(
 				`${upstashRedisRestUrl}/get/${sessionId}`,
 				{
@@ -44,7 +43,7 @@ export async function middleware(req: NextRequest, res: NextResponse) {
 			).then((res) => res.json())
 
 			const session = JSON.parse(result)
-
+			console.log(session)
 			if (session) {
 				return NextResponse.next()
 			} else {
