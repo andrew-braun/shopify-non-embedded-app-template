@@ -5,6 +5,9 @@ import { ApiRequest, NextApiResponse } from "@types"
 import { Session } from "@shopify/shopify-api"
 
 export default async function handler(req: ApiRequest, res: NextApiResponse) {
+	/* shopify.auth.begin will ultimately redirect users to this URL,
+	 ** where their session will be loaded and stored.
+	 */
 	try {
 		const callbackResponse = await Shopify.auth.callback({
 			rawRequest: req,
@@ -18,6 +21,7 @@ export default async function handler(req: ApiRequest, res: NextApiResponse) {
 			callbackResponse.session
 		)
 
+		/* Also initiate webhooks and check for successes */
 		const webhooks = await Shopify.webhooks.register({
 			session,
 		})

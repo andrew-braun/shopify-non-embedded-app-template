@@ -12,6 +12,12 @@ const headers = {
 	"Content-Type": "application/json",
 }
 
+/* This implements a custom session storage instance using a Redis database.
+ ** Shopify has their own Redis session storage implementation, but it
+ ** was causing endless bugs. This is based on the Shopify example, and it works.
+ ** Currently, it uses Upstash, but it can be modified to use any Redis database with
+ ** an API endpoint (or theoretically via a client library)
+ */
 export class CustomSessionStorageClass implements SessionStorage {
 	constructor() {}
 

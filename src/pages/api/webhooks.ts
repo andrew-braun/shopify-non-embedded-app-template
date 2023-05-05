@@ -1,6 +1,6 @@
 import Shopify from "@lib/shopify"
 import CustomSessionStorage from "@lib/sessionStorage/redisSessionStorage"
-import { transformToRawBody } from "@lib/utils/micro"
+import { transformToRawBody } from "@lib/utils/requests"
 
 import { buffer } from "micro"
 import { ApiRequest, NextApiResponse } from "@types"

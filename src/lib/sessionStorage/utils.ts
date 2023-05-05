@@ -11,7 +11,7 @@ export async function loadSessionFromReq(
 		rawRequest: req,
 		rawResponse: res,
 	})
-	const session = await CustomSessionStorage.loadSession(req.body.sessionId)
+	const session = await CustomSessionStorage.loadSession(sessionId)
 
 	return session
 }

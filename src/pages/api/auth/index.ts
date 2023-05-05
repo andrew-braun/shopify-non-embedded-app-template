@@ -16,7 +16,4 @@ export default async function handler(req: ApiRequest, res: NextApiResponse) {
 		callbackPath: "/api/auth/callback",
 		isOnline: true,
 	})
-
-	// console.log("Redirecting to auth route: ", authRoute)
-	// res.redirect(authRoute)
 }

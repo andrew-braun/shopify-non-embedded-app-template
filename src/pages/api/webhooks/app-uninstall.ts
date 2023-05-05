@@ -1,7 +1,7 @@
 import Shopify from "@lib/shopify"
 import { ApiRequest, NextApiResponse } from "@types"
 import { loadSessionFromReq } from "@lib/sessionStorage/utils"
-import { transformToRawBody } from "@lib/utils/micro"
+import { transformToRawBody } from "@lib/utils/requests"
 
 export default async function handler(req: ApiRequest, res: NextApiResponse) {
 	console.log("Incoming Webhook")
