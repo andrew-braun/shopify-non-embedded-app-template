@@ -1,5 +1,5 @@
 import { ApiRequest, NextApiResponse } from "@types"
-import CustomSessionStorage from "@lib/redisSessionStorage"
+import CustomSessionStorage from "@lib/sessionStorage/redisSessionStorage"
 import Shopify from "@lib/shopify"
 
 export async function loadSessionFromReq(

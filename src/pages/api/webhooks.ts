@@ -1,5 +1,5 @@
 import Shopify from "@lib/shopify"
-import CustomSessionStorage from "@lib/redisSessionStorage"
+import CustomSessionStorage from "@lib/sessionStorage/redisSessionStorage"
 import { transformToRawBody } from "@lib/utils/micro"
 
 import { buffer } from "micro"

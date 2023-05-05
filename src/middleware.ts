@@ -1,4 +1,4 @@
-import CustomSessionStorage from "@lib/redisSessionStorage"
+import CustomSessionStorage from "@lib/sessionStorage/redisSessionStorage"
 
 import { NextRequest, NextResponse } from "next/server"
 

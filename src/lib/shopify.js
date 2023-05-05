@@ -2,7 +2,6 @@ import "@shopify/shopify-api/adapters/node"
 import { shopifyApi, ApiVersion, BillingInterval } from "@shopify/shopify-api"
 import { restResources } from "@shopify/shopify-api/rest/admin/2022-07"
 
-// import SessionStorage from "./sessionStorage"
 import webhooks from "../webhooks"
 
 const Shopify = shopifyApi({

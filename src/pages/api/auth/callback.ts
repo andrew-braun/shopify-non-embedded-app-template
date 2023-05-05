@@ -1,6 +1,6 @@
 import Shopify from "@lib/shopify"
 
-import CustomSessionStorage from "@lib/redisSessionStorage"
+import CustomSessionStorage from "@lib/sessionStorage/redisSessionStorage"
 import { ApiRequest, NextApiResponse } from "@types"
 import { Session } from "@shopify/shopify-api"
 
