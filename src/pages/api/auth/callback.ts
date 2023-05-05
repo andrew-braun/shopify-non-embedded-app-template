@@ -1,20 +1,19 @@
 import Shopify from "@lib/shopify"
-import SessionStorage from "@lib/sessionStorage"
+
+import CustomSessionStorage from "@lib/redisSessionStorage"
 import { ApiRequest, NextApiResponse } from "@types"
 
 export default async function handler(req: ApiRequest, res: NextApiResponse) {
-	console.log("Hit callback route")
 	try {
 		const callbackResponse = await Shopify.auth.callback({
 			rawRequest: req,
 			rawResponse: res,
 		})
-		console.log("Callback response: ", callbackResponse)
+		console.log("Shopify auth callback called")
 
-		const storedSession = await SessionStorage.storeSession(
+		const storedSession = await CustomSessionStorage.storeSession(
 			callbackResponse.session
 		)
-		console.log("Stored session: ", storedSession)
 
 		// const webhooks = await Shopify.Webhooks.Registry.registerAll({
 		// 	shop: session.shop,

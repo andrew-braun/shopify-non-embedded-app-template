@@ -1,5 +1,9 @@
+/* Reimplemented a lot of this logic in the redisSessionStorage file
+ ** using the new Shopify guidelines:
+ ** https://github.com/Shopify/shopify-app-js/blob/main/packages/shopify-app-session-storage/implementing-session-storage.md
+ */
+
 import { RedisSessionStorage } from "@shopify/shopify-app-session-storage-redis"
-import Shopify from "@shopify/shopify-api"
 
 import fetch from "node-fetch"
 

@@ -1,15 +1,6 @@
-import SessionStorage from "@lib/sessionStorage"
-import Shopify from "@lib/shopify"
+import CustomSessionStorage from "@lib/redisSessionStorage"
 
 import { NextRequest, NextResponse } from "next/server"
-
-const upstashRedisRestUrl = process.env.UPSTASH_REDIS_REST_URL
-
-const headers = {
-	Authorization: `Bearer ${process.env.UPSTASH_REDIS_REST_TOKEN}`,
-	Accept: "application/json",
-	"Content-Type": "application/json",
-}
 
 export async function middleware(req: NextRequest, res: NextResponse) {
 	if (req.url.includes("/app") || req.url.includes("/graphql")) {
@@ -20,8 +11,6 @@ export async function middleware(req: NextRequest, res: NextResponse) {
 		const { shop } = query
 		const sessionId = req.cookies.get("shopify_app_session").value
 
-		console.log("Session id: ", sessionId)
-
 		if (sessionId === undefined) {
 			if (shop) {
 				return NextResponse.redirect(
@@ -31,19 +20,10 @@ export async function middleware(req: NextRequest, res: NextResponse) {
 			console.log("Redirect to login")
 			return NextResponse.redirect(`${process.env.HOST}/login`)
 		} else {
-			// console.log("Load session: ", SessionStorage.loadSession(sessionId))
-			// const session = await SessionStorage.loadSession(sessionId)
+			const sessionResponse = await CustomSessionStorage.loadSession(sessionId)
 
-			const { result } = await fetch(
-				`${upstashRedisRestUrl}/get/${sessionId}`,
-				{
-					method: "GET",
-					headers,
-				}
-			).then((res) => res.json())
+			const session = sessionResponse
 
-			const session = JSON.parse(result)
-			console.log(session)
 			if (session) {
 				return NextResponse.next()
 			} else {
@@ -52,7 +32,7 @@ export async function middleware(req: NextRequest, res: NextResponse) {
 						`${process.env.HOST}/api/auth/offline?shop=${shop}`
 					)
 				} else {
-					console.log("Request method: ", req.method)
+					console.log("Redirect to login")
 					return NextResponse.redirect(`${process.env.HOST}/login`, 303)
 				}
 			}
