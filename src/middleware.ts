@@ -2,7 +2,7 @@ import CustomSessionStorage from "@lib/redisSessionStorage"
 
 import { NextRequest, NextResponse } from "next/server"
 
-export async function middleware(req: NextRequest, res: NextResponse) {
+export default async function middleware(req: NextRequest, res: NextResponse) {
 	if (req.url.includes("/app") || req.url.includes("/graphql")) {
 		const urlParams = new URLSearchParams(req.url.split("?")[1])
 

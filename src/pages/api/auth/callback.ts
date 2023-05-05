@@ -2,6 +2,7 @@ import Shopify from "@lib/shopify"
 
 import CustomSessionStorage from "@lib/redisSessionStorage"
 import { ApiRequest, NextApiResponse } from "@types"
+import { Session } from "@shopify/shopify-api"
 
 export default async function handler(req: ApiRequest, res: NextApiResponse) {
 	try {
@@ -9,24 +10,27 @@ export default async function handler(req: ApiRequest, res: NextApiResponse) {
 			rawRequest: req,
 			rawResponse: res,
 		})
-		console.log("Shopify auth callback called")
+		const session = new Session(callbackResponse.session)
+
+		console.log("Shopify auth callback complete")
 
 		const storedSession = await CustomSessionStorage.storeSession(
 			callbackResponse.session
 		)
 
-		// const webhooks = await Shopify.Webhooks.Registry.registerAll({
-		// 	shop: session.shop,
-		// 	accessToken: session.accessToken,
-		// })
+		const webhooks = await Shopify.webhooks.register({
+			session,
+		})
 
-		// Object.keys(webhooks).forEach((webhook) => {
-		// 	if (webhooks[webhook].success === true) {
-		// 		console.log(`Registered ${webhook} webhook`)
-		// 	} else {
-		// 		console.log(`Failed to register ${webhook} webhook: ${webhooks.result}`)
-		// 	}
-		// })
+		Object.keys(webhooks).forEach((topic) => {
+			webhooks[topic].forEach((webhook) => {
+				if (webhook.success === true) {
+					console.log(`Registered ${topic} webhook`)
+				} else {
+					console.log(`Failed to register ${topic} webhook: ${webhook.result}`)
+				}
+			})
+		})
 	} catch (error) {
 		console.log(error)
 	}

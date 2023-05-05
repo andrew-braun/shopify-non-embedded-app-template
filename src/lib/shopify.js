@@ -16,6 +16,6 @@ const Shopify = shopifyApi({
 	restResources,
 })
 
-// Shopify.webhooks.addHandlers(webhooks)
+Shopify.webhooks.addHandlers(webhooks)
 
 export default Shopify

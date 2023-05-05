@@ -1,18 +1,17 @@
 import Shopify from "@lib/shopify"
-import CustomSessionStorage from "@lib/redisSessionStorage"
-import { transformToRawBody } from "@lib/utils/micro"
-
-import { buffer } from "micro"
 import { ApiRequest, NextApiResponse } from "@types"
+import { loadSessionFromReq } from "@lib/sessionStorage/utils"
+import { transformToRawBody } from "@lib/utils/micro"
 
 export default async function handler(req: ApiRequest, res: NextApiResponse) {
 	console.log("Incoming Webhook")
 	if (req.method === "POST") {
 		try {
+			const session = await loadSessionFromReq(req, res)
 			const rawBody = await transformToRawBody(req)
 
 			await Shopify.webhooks.process({
-				rawBody: rawBody,
+				rawBody,
 				rawRequest: req,
 				rawResponse: res,
 			})
