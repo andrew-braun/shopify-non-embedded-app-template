@@ -63,6 +63,7 @@ const nextConfig = async (phase) => {
 	let HOST = process.env.HOST
 
 	if (phase === PHASE_DEVELOPMENT_SERVER && !process.env.HOST) {
+		// Make sure that the HOST .env variable is deleted; otherwise the app won't run
 		HOST = await setEnvironmentAndReturnHost()
 	}
 	/**

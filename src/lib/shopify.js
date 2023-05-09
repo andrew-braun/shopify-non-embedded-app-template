@@ -1,5 +1,5 @@
 import "@shopify/shopify-api/adapters/node"
-import { shopifyApi, ApiVersion, BillingInterval } from "@shopify/shopify-api"
+import { shopifyApi, ApiVersion } from "@shopify/shopify-api"
 import { restResources } from "@shopify/shopify-api/rest/admin/2022-07"
 
 import webhooks from "../webhooks"

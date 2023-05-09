@@ -2,6 +2,7 @@ import { ApiRequest, NextApiResponse } from "@types"
 import CustomSessionStorage from "@lib/sessionStorage/redisSessionStorage"
 import Shopify from "@lib/shopify"
 
+// This function is used to load the session from an API request
 export async function loadSessionFromReq(
 	req: ApiRequest,
 	res: NextApiResponse

@@ -7,7 +7,6 @@ export default async function handler(req: ApiRequest, res: NextApiResponse) {
 	 ** is the active one.
 	 */
 	const shop = req.query.shop
-	console.log(shop)
 
 	res.redirect(`${process.env.HOST}/api/auth/offline?shop=${shop}`)
 }
