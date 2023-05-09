@@ -9,7 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@apollo/client": "^3.6.2",
+		"@apollo/client": "^3.7.14",
 		"@shopify/cli-kit": "^3.0.24",
 		"@shopify/polaris": "^10.48.0",
 		"@shopify/shopify-api": "^7.0.0",
@@ -20,14 +20,14 @@
 		"localtunnel": "^2.0.2",
 		"micro": "^10.0.1",
 		"next": "^13.3.1",
-		"ngrok": "^4.3.1",
+		"ngrok": "^5.0.0-beta.2",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	},
 	"devDependencies": {
 		"@types/node": "^18.16.2",
-		"@types/react": "^18.2.0",
-		"eslint": "^8.39.0",
+		"@types/react": "^18.2.6",
+		"eslint": "^8.40.0",
 		"eslint-config-next": "^13.3.1",
 		"typescript": "^5.0.4"
 	}
